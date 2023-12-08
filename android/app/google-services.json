@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "983110128968",
+    "project_id": "policecheckpointtak",
+    "storage_bucket": "policecheckpointtak.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983110128968:android:abfcdaa341006434018f7d",
+        "android_client_info": {
+          "package_name": "com.policecheckpointtak"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpZncCcqm4dfYh8bnVJkIN3lYFPNczHdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

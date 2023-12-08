@@ -6,25 +6,43 @@ import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-na
 
 import EmergencyPhoneNumber from './src/EmergencyPhoneNumber';
 import ReportLostCard from './src/ReportLostCard';
+import HomePage from './src/HomePageComponents/HomePage';
+import ReportPage from './src/HomePageComponents/ReportPage';
+import AdminLogin from './src/AdminComponents/AdminLogin';
 
 const App: React.FC = () => {
   const Drawer = createDrawerNavigator();
 
   return (
     <NavigationContainer>
-      <Drawer.Navigator>
+      <Drawer.Navigator
+        initialRouteName='HomePage'>
+        <Drawer.Screen
+          name='HomePage'
+          component={HomePage}
+          options={{
+            title: 'HomePage',
+          }}
+        />
         <Drawer.Screen
           name='ReportLostCard'
           component={ReportLostCard}
           options={{
-            title:'แจ้งบัตรหาย',
+            title: 'แจ้งบัตรหาย',
           }}
         />
         <Drawer.Screen
           name='EmergencyPhoneNumber'
           component={EmergencyPhoneNumber}
           options={{
-            title:'เบอร์โทรฉุกเฉิน',
+            title: 'เบอร์โทรฉุกเฉิน',
+          }}
+        />
+        <Drawer.Screen
+          name='AdminLogin'
+          component={AdminLogin}
+          options={{
+            title: 'AdminLogin',
           }}
         />
       </Drawer.Navigator>
