@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { ScreenArray, drawerMenu } from '../Constants/constants';
+import { ScreenArray,  } from '../Constants/constants';
 import CustomDrawer from './CustomDrawer';
 import { useAuth } from '../ProviderComponents/AuthContext';
 
@@ -16,7 +16,7 @@ const DrawerNav = () => {
   }
 
   useEffect(() => {
-    user ? (Filter('non')) : (Filter('log'))
+    user ? (Filter('log')) : (Filter('non'))
   }, [user])
 
   return (

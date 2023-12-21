@@ -1,7 +1,7 @@
 import HomePage from "../HomePageComponents/HomePage";
 import EmergencyPhoneNumber from "../EmergencyPhoneNumber";
-import ReportLostCard from "../ReportLostCard";
 import AdminLogin from "../AdminComponents/AdminLogin";
+import AdminOfficerPage from "../AdminComponents/AdminOfficerPage";
 
 export const constant = {
     SPACING: 16,
@@ -17,13 +17,9 @@ export const IconSize = {
 
 export const ScreenArray = [
     { route: "HomePage", label: "HomePage", component: HomePage, status: 'non' },
-    // { route: "EmergencyPhoneNumber", label: "EmergencyPhoneNumber", component: EmergencyPhoneNumber, status: 'non' },
     // { route: "ReportLostCard", label: "ReportLostCard", component: ReportLostCard, status: 'non' },
-    { route: "AdminLogin", label: "AdminLogin", component: AdminLogin, status: 'log' },
-];
-
-export const drawerMenu = [
-    { route: "logOunt", title: 'logOunt', },
+    { route: "AdminOfficerPage", label: "AdminOfficerPage", component: AdminOfficerPage, status: 'log' },
+    { route: "EmergencyPhoneNumber", label: "EmergencyPhoneNumber", component: EmergencyPhoneNumber, status: 'non' },
 ];
 
 

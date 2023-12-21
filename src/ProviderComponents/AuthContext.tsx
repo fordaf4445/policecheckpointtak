@@ -10,11 +10,18 @@ interface AuthState {
     isLoading: boolean;
 };
 
+interface State {
+    adminLogin: boolean;
+    adminLogOunt: boolean;
+}
+
 interface AuthContextType {
     user: FirebaseAuthTypes.User | null;
     isLoading: boolean;
     login: (email: string, password: string) => void;
     logout: () => void;
+    state: State;
+    setState: React.Dispatch<React.SetStateAction<State>>; // รวมฟังก์ชัน setState ใน context
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -25,9 +32,14 @@ export const AuthProvider: React.FC<AuthContextProps> = ({ children }) => {
         isLoading: true,
     });
 
+    const [state, setState] = useState<State>({
+        adminLogin: false,
+        adminLogOunt: false,
+    });
+
     useEffect(() => {
         const unsubscribe = auth().onAuthStateChanged((user) => {
-            setAuthState({ user, isLoading: false });
+            setAuthState((prevState) => ({ ...prevState, user: user }));
         })
 
         return () => {
@@ -38,27 +50,30 @@ export const AuthProvider: React.FC<AuthContextProps> = ({ children }) => {
     const login = async (email: string, password: string) => {
         try {
             await auth().signInWithEmailAndPassword(email, password);
-            console.log(autState , 'login successful');
-            
+            console.log(autState, 'login successful');
+            setState((p) => ({ ...p, adminLogin: !state.adminLogin }))
         } catch (error) {
             console.error('Login error: ' + error);
         }
     };
 
     const logout = async () => {
-        try{
+        try {
             await auth().signOut();
-            console.log(autState , 'logOut successful');
+            console.log(autState, 'logOut successful');
+            setState((p) => ({ ...p, adminLogOunt: !state.adminLogOunt }))
         } catch (error) {
             console.error('Logount error' + error)
         }
     };
 
     const contextValue: AuthContextType = {
-        user : autState.user,
-        isLoading:autState.isLoading,
+        user: autState.user,
+        isLoading: autState.isLoading,
         login,
         logout,
+        state,
+        setState,
     }
 
     return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
@@ -66,7 +81,7 @@ export const AuthProvider: React.FC<AuthContextProps> = ({ children }) => {
 
 export const useAuth = () => {
     const context = useContext(AuthContext);
-    if(!context) {
+    if (!context) {
         throw new Error('useAuth must be used within an AuthProvider');
     }
     return context;

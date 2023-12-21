@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View , Button  } from 'react-native'
+import { StyleSheet, Text, View , Button ,Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore';
 import Icon,{Icons} from '../Accessories/Icons';
-import {Alert} from '../Accessories/Alert';
+import {AlertCon} from '../Accessories/Alert';
 
 interface Data {
   id: string;
@@ -10,7 +10,8 @@ interface Data {
 }
 
 const HomePage = () => {
-  const [data, setData] = useState<Data[]>([])
+  const [data, setData] = useState<Data[]>([]);
+  const [visible , setVisible] = useState(false);
 
   useEffect(() => {
     const unsubscribe = firestore()
@@ -39,8 +40,7 @@ const HomePage = () => {
   };
   return (
     <View>
-      <Alert isVisible={true} textPrimary='แจ้งเตือน' textSecondary='คุณต้องการออกระบบใช่หรือไม่ ?'
-      />
+      <AlertCon isVisible={visible} textPrimary='แจ้งเตือน' textSecondary='คุณต้องการออกระบบใช่หรือไม่ ?' onPressOK={() => {setVisible(!visible)}}/>
       {data.map( data => (
         <View key={data.id}>
           <Text>name: {data.name}</Text>
@@ -48,7 +48,10 @@ const HomePage = () => {
       ))}
       <Button
       title='click'
-      onPress={() => {}}/>
+      onPress={() => {Alert.alert('Alert')}}/>
+      <Button
+      title='click'
+      onPress={() => {setVisible(!visible)}}/>
       <Icon type={Icons.FontAwesome} name='home' />
     </View>
   );
