@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View, Button, TextInput, } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Animated } from 'react-native';
 import React, { useState, } from 'react';
 import { useAuth } from '../ProviderComponents/AuthContext';
 import { AlertCon } from '../Accessories/Alert';
 import Fonts from '../Accessories/Fonts';
 
 const AdminLogin: React.FC = () => {
-  const { login, logout, state, setState } = useAuth();
+  const { login, logout, state, setState , isLoading} = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -42,6 +42,17 @@ const AdminLogin: React.FC = () => {
         onPressOK={() => { handleLogin() }}
         onPressCancel={() => { setState((prevState) => ({ ...prevState, adminLogin: !state.adminLogin })) }}
         buttonsStyle='cancel' />
+      <AlertCon
+        isVisible={isLoading}
+        textPrimary='กรุณารอสักครู่'
+        buttonsStyle={null}
+        styleView={(
+          <View style={{ alignItems: "center", width: 150}}>
+            <Animated.Image
+              source={require('../../assets/gif/wired-outline-45-clock-time.gif')}
+              style={{ width: 70, height: 70 }} />
+          </View>
+        )} />
     </View>
   );
 };

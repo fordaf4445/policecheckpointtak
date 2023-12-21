@@ -6,6 +6,7 @@ import { DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { DrawerDescriptorMap, DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
 import { useAuth } from '../ProviderComponents/AuthContext';
 import AdminLogin from '../AdminComponents/AdminLogin';
+import Icon, { Icons } from '../Accessories/Icons';
 
 export type Props = {
   state: DrawerNavigationState<ParamListBase>;
@@ -19,17 +20,19 @@ const CustomDrawer = (props: Props) => {
 
   return (
     <Container>
-      <AdminLogin/>
+      <AdminLogin />
       <View>
         <Text style={styles.fontStyle}>WelCome</Text>
       </View>
       <DrawerItemList {...props} />
       {user ? (
         <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-          <DrawerItem label='LogOut' onPress={() => { setState((p) => ({ ...p, adminLogOunt: !state.adminLogOunt })) }} />
+          <DrawerItem label='LogOut' onPress={() => { setState((p) => ({ ...p, adminLogOunt: !state.adminLogOunt })) }}
+            icon={({ size, color }) => <Icon type={Icons.FontAwesome} name='sign-out' size={size} color={color} />} />
         </View>
       ) : (<View style={{ flex: 1, justifyContent: 'flex-end' }}>
-        <DrawerItem label='AdminLogin' onPress={() => { setState((p) => ({ ...p, adminLogin: !state.adminLogin })) }} />
+        <DrawerItem label='AdminLogin' onPress={() => { setState((p) => ({ ...p, adminLogin: !state.adminLogin })) }}
+          icon={({ size, color }) => <Icon type={Icons.FontAwesome} name='sign-in' size={size} color={color} />} />
       </View>)}
 
     </Container>

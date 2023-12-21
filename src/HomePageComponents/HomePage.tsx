@@ -40,7 +40,6 @@ const HomePage = () => {
   };
   return (
     <View>
-      <AlertCon isVisible={visible} textPrimary='แจ้งเตือน' textSecondary='คุณต้องการออกระบบใช่หรือไม่ ?' onPressOK={() => {setVisible(!visible)}}/>
       {data.map( data => (
         <View key={data.id}>
           <Text>name: {data.name}</Text>

@@ -9,14 +9,19 @@ interface AlertProps {
     textPrimary: string,
     textSecondary?: string,
     style?: ViewStyle,
-    buttonsStyle?: 'default' | 'cancel',
+    buttonsStyle: 'default' | 'cancel' | null;
     styleView?: React.ReactNode,
     onPressOK?: (() => void | undefined),
     onPressCancel?: (() => void | undefined),
 }
 
 export const AlertCon: React.FC<AlertProps> = (props) => {
-
+    const dynamicStyle = {
+        borderTopWidth: props.buttonsStyle == 'cancel' && 'default' ? (1) : (0),
+        marginTop: props.buttonsStyle == 'cancel' && 'default' ? (10) : (0),
+        paddingTop: props.buttonsStyle == 'cancel' && 'default' ? (5) : (0),
+        
+    }
     return (
         <View>
             <Overlay isVisible={props.isVisible} overlayStyle={[styles.AlertContainer, props.style]}>
@@ -25,26 +30,22 @@ export const AlertCon: React.FC<AlertProps> = (props) => {
                     {props.styleView}
                     <Text style={{ fontFamily: Fonts.AlerttextSecondary, color: '#000', fontSize: 15 }}>{props.textSecondary}</Text>
                 </View>
-                <View style={styles.ButtonContainer}>
-                    {props.buttonsStyle !== 'cancel' ?
+                <View style={[styles.ButtonContainer, dynamicStyle]}>
+                    {props.buttonsStyle == 'default' ?
                         (
                             <TouchableOpacity style={styles.buttonDefaultStyle} onPress={props.onPressOK}>
                                 <Text style={{ fontFamily: Fonts.AlerttextPrimary, color: Colors.Blue_01, fontSize: 17 }}>ตกลง</Text>
                             </TouchableOpacity>
-                        ) :
-                        (
-                            <View style={{ flexDirection: 'row', }}>
-                                <TouchableOpacity style={styles.buttonCancelStyle} onPress={props.onPressCancel}>
-                                    <Text style={{ fontFamily: Fonts.AlerttextPrimary, color: Colors.Blue_01, fontSize: 17 }}>ยกเลิก</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.buttonCancelStyle} onPress={props.onPressOK}>
-                                    <Text style={{ fontFamily: Fonts.AlerttextPrimary, color: Colors.Blue_01, fontSize: 17 }}>ตกลง</Text>
-                                </TouchableOpacity>
-                            </View>
-                        )}
-
+                        ) : (null)}
+                    {props.buttonsStyle == 'cancel' ? (<View style={{ flexDirection: 'row', }}>
+                        <TouchableOpacity style={styles.buttonCancelStyle} onPress={props.onPressCancel}>
+                            <Text style={{ fontFamily: Fonts.AlerttextPrimary, color: Colors.Blue_01, fontSize: 17 }}>ยกเลิก</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonCancelStyle} onPress={props.onPressOK}>
+                            <Text style={{ fontFamily: Fonts.AlerttextPrimary, color: Colors.Blue_01, fontSize: 17 }}>ตกลง</Text>
+                        </TouchableOpacity>
+                    </View>) : (null)}
                 </View>
-
             </Overlay>
         </View>
 
@@ -60,13 +61,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     ButtonContainer: {
-        borderTopWidth: 1,
         borderColor: Colors.GrayBorder,
         width: '105%',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 10,
-        paddingTop: 5
     },
     buttonDefaultStyle: {
         width: '90%',

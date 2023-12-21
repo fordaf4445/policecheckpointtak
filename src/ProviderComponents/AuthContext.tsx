@@ -29,7 +29,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<AuthContextProps> = ({ children }) => {
     const [autState, setAuthState] = useState<AuthState>({
         user: null,
-        isLoading: true,
+        isLoading: false,
     });
 
     const [state, setState] = useState<State>({
@@ -48,12 +48,15 @@ export const AuthProvider: React.FC<AuthContextProps> = ({ children }) => {
     }, []);
 
     const login = async (email: string, password: string) => {
+        await setAuthState((prevState) => ({ ...prevState, isLoading: true }));
         try {
             await auth().signInWithEmailAndPassword(email, password);
             console.log(autState, 'login successful');
-            setState((p) => ({ ...p, adminLogin: !state.adminLogin }))
+            setAuthState((prevState) => ({ ...prevState, isLoading: false }));
+            setState((p) => ({ ...p, adminLogin: !state.adminLogin }));
         } catch (error) {
             console.error('Login error: ' + error);
+            setAuthState((prevState) => ({ ...prevState, isLoading: false }));
         }
     };
 
