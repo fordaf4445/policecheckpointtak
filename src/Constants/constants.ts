@@ -1,7 +1,6 @@
-import HomePage from "../HomePageComponents/HomePage";
 import EmergencyPhoneNumber from "../EmergencyPhoneNumber";
-import AdminLogin from "../AdminComponents/AdminLogin";
-import AdminOfficerPage from "../AdminComponents/AdminOfficerPage";
+import { AdminComponents , HomePageComponents , } from "../Navigation/StackNav";
+
 
 export const constant = {
     SPACING: 16,
@@ -16,10 +15,11 @@ export const IconSize = {
 }
 
 export const ScreenArray = [
-    { route: "HomePage", label: "HomePage", component: HomePage, status: 'non' },
+    { route: "HomePageComponents", label: "HomePageComponents", component: HomePageComponents, status: 'non' , headerShow : false },
     // { route: "ReportLostCard", label: "ReportLostCard", component: ReportLostCard, status: 'non' },
-    { route: "AdminOfficerPage", label: "AdminOfficerPage", component: AdminOfficerPage, status: 'log' },
-    { route: "EmergencyPhoneNumber", label: "EmergencyPhoneNumber", component: EmergencyPhoneNumber, status: 'non' },
+    // { route: "AdminOfficerPage", label: "AdminOfficerPage", component: AdminOfficerPage, status: 'log' },
+    { route: "EmergencyPhoneNumber", label: "EmergencyPhoneNumber", component: EmergencyPhoneNumber, status: 'non' ,headerShow : true },
+    { route: "AdminComponents", label: "AdminComponents", component: AdminComponents, status: 'log' ,headerShow : false },
 ];
 
 

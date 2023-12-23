@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { ScreenArray,  } from '../Constants/constants';
+import { ScreenArray, } from '../Constants/constants';
 import CustomDrawer from './CustomDrawer';
 import { useAuth } from '../ProviderComponents/AuthContext';
 
@@ -24,7 +24,13 @@ const DrawerNav = () => {
       drawerContent={(props) => <CustomDrawer {...props} />}>
       {screenFilter.map((item, index) => {
         return (
-          <Drawer.Screen key={index} name={item.route} component={item.component} />
+          <Drawer.Screen
+            key={index}
+            name={item.route}
+            component={item.component}
+            options={{
+              headerShown: item.headerShow,
+            }} />
         )
       })}
 

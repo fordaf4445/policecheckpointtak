@@ -41,7 +41,7 @@ export const AlertCon: React.FC<AlertProps> = (props) => {
                         <TouchableOpacity style={styles.buttonCancelStyle} onPress={props.onPressCancel}>
                             <Text style={{ fontFamily: Fonts.AlerttextPrimary, color: Colors.Blue_01, fontSize: 17 }}>ยกเลิก</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonCancelStyle} onPress={props.onPressOK}>
+                        <TouchableOpacity style={styles.buttonOkStyle} onPress={props.onPressOK}>
                             <Text style={{ fontFamily: Fonts.AlerttextPrimary, color: Colors.Blue_01, fontSize: 17 }}>ตกลง</Text>
                         </TouchableOpacity>
                     </View>) : (null)}
@@ -74,5 +74,12 @@ const styles = StyleSheet.create({
         borderRightWidth: 0.5,
         alignItems: 'center',
         width: '50%',
+        borderColor: Colors.GrayBorder
+    },
+    buttonOkStyle: {
+        borderLeftWidth: 0.5,
+        alignItems: 'center',
+        width: '50%',
+        borderColor: Colors.GrayBorder
     },
 })

@@ -13,6 +13,7 @@ export type Props = {
   navigation: DrawerNavigationHelpers;
   descriptors: DrawerDescriptorMap;
 }
+
 const CustomDrawer = (props: Props) => {
   const navigate = useNavigation();
   const { user, state, setState } = useAuth();
